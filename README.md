@@ -1,9 +1,6 @@
 # Guardians
 Fall Prevention ICT PROVONO project by team Guardians, members are attending Seoul National University of Science and Technology(Computer Engineering)
-<<<<<<< HEAD
-hi ko
-.____________.   .___.
-=======
+
 Our Team informations are following:
 
 1. JoungHaeMin (Team Leader)
@@ -13,4 +10,3 @@ Our Team informations are following:
 2. UmTaeUk (Team Member)
 	:Seoultech Computer Engineering Student, 2nd Grade.
 	:OpenCV, ML Developer.
->>>>>>> haemin
