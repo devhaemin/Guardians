@@ -2,8 +2,19 @@ package kr.guardians.falldetection.POJO;
 
 public class Room {
 
+    String hospitalCode;
     String roomCode;
     String roomName;
+    int capacity;
+
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
 
     public String getRoomCode() {
         return roomCode;
