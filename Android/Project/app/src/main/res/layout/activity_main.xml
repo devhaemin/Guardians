@@ -1,16 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Activity.MainActivity">
 
+
+    <kr.guardians.falldetection.CustomWidget.CustomAppbar
+        android:layout_width="match_parent"
+        android:id="@+id/appbar"
+        android:layout_height="wrap_content"
+        app:isBackVisible="false"
+        app:isSettingVisible="false"
+        app:title="가디언즈" />
+
     <android.support.v4.view.ViewPager
+        android:layout_below="@id/appbar"
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/li">
 
     </android.support.v4.view.ViewPager>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/li"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            style="?android:attr/borderlessButtonStyle"
+            android:elevation="0dp"
+            android:background="@android:color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ToggleButton
+                android:layout_margin="8dp"
+                android:id="@+id/toggle_home"
+                style="?android:attr/borderlessButtonStyle"
+                android:elevation="0dp"
+                android:layout_centerInParent="true"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_bg_myhome"
+                android:textOff="@null"
+                android:textOn="@null" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="?android:attr/borderlessButtonStyle"
+            android:elevation="0dp"
+            android:background="@android:color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ToggleButton
+                android:layout_margin="8dp"
+                android:id="@+id/toggle_list"
+                style="?android:attr/borderlessButtonStyle"
+                android:elevation="0dp"
+                android:layout_centerInParent="true"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_bg_all_home"
+                android:textOff="@null"
+                android:textOn="@null" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="?android:attr/borderlessButtonStyle"
+            android:elevation="0dp"
+            android:background="@android:color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ToggleButton
+                android:layout_margin="8dp"
+                android:id="@+id/toggle_alarm"
+                style="?android:attr/borderlessButtonStyle"
+                android:elevation="0dp"
+                android:layout_centerInParent="true"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_bg_alarm"
+                android:textOff="@null"
+                android:textOn="@null" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="?android:attr/borderlessButtonStyle"
+            android:elevation="0dp"
+            android:background="@android:color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ToggleButton
+                android:layout_margin="8dp"
+                android:id="@+id/toggle_psearch"
+                style="?android:attr/borderlessButtonStyle"
+                android:elevation="0dp"
+                android:layout_centerInParent="true"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_bg_search"
+                android:textOff="@null"
+                android:textOn="@null" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

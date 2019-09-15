@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterProgress.InsertNameActivity">
+
+
+    <kr.guardians.falldetection.CustomWidget.CustomAppbar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar"
+        app:title="프로필 입력"
+        app:titleTextColor="@android:color/black"
+        app:isBackVisible="false"
+        app:isSettingVisible="false" />
+
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:src="@drawable/icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/appbar"
+        android:layout_marginTop="60dp"/>
+
+
+    <EditText
+        android:id="@+id/edit_name"
+        android:gravity="center"
+        android:hint="이름을 입력하세요"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/profile_image"/>
+
+    <EditText
+        android:editable="false"
+        android:clickable="false"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/edit_name"
+        android:id="@+id/search_button"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_toStartOf="@id/mode_menu_btn"
+        android:background="@drawable/a_rounded_search_btn"
+        android:drawableLeft="@drawable/a_search_edit_icon"
+        android:drawablePadding="6dp"
+        android:ellipsize="start"
+        android:gravity="center_vertical"
+        android:hint="요양원 이름 검색"
+        android:paddingStart="16dp"
+        android:pointerIcon="text"
+        android:textSize="12sp" />
+
+    <Button
+        android:enabled="false"
+        android:textSize="20sp"
+        android:textColor="#808080"
+        android:text="시작하기"
+        android:background="@drawable/a_btn_enable_toggle"
+        android:layout_below="@id/search_button"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+</RelativeLayout>

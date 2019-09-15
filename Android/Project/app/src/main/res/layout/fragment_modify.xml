@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.ModifyFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f8f6f4"
+        android:orientation="vertical">
+
+        <TextView
+            android:elevation="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="정보수정" />
+
+        <Button
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/patient_modify"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/white"
+            android:elevation="0dp"
+            android:gravity="start|center_vertical"
+            android:padding="14dp"
+            android:text="환자정보 수정하기"
+            android:textSize="16sp"
+            style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="18dp"
+            android:text="알림설정" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/white"
+            android:elevation="0dp"
+            android:gravity="start|center_vertical"
+            android:padding="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="내호실 알림"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <Switch
+                android:id="@+id/my_alarm_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:checked="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white"
+            android:elevation="0dp"
+            android:gravity="start|center_vertical"
+            android:padding="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="모든호실 알림"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <Switch
+                android:id="@+id/all_alarm_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:checked="true" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="18dp"
+            android:text="고객센터/도움말" />
+
+        <Button
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/email_submit"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/white"
+            android:elevation="0dp"
+            android:gravity="start|center_vertical"
+            android:padding="14dp"
+            android:text="이메일 문의하기"
+            android:textSize="16sp"
+            style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="18dp"
+            android:text="약관 및 정책" />
+
+        <Button
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/show_private_term"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/white"
+            android:elevation="0dp"
+            android:gravity="start|center_vertical"
+            android:padding="14dp"
+            android:text="개인정보처리방침"
+            android:textSize="16sp"
+            style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+        <Button
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/show_gps_term"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white"
+            android:elevation="0dp"
+            android:gravity="start|center_vertical"
+            android:padding="14dp"
+            android:text="위치기반서비스 이용약관"
+            android:textSize="16sp"
+            style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="18dp"
+            android:text="버전정보" />
+
+        <Button
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/app_version"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white"
+            android:elevation="0dp"
+            android:gravity="start|center_vertical"
+            android:padding="14dp"
+            android:text="1.0.1"
+            android:textSize="16sp"
+            android:theme="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+    </LinearLayout>
+</ScrollView>

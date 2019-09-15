@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemTitle"
+        android:title="정렬방식" />
+    <item android:title="ㄱㄴㄷ 순"
+        android:id="@+id/hangeul_order"/>
+    <item android:title="위험도 순"
+        android:id="@+id/warning_order"/>
+    <item android:title="호실 순"
+        android:id="@+id/room_order"/>
+</menu>

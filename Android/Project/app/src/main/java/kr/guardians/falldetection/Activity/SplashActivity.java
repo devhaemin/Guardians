@@ -62,11 +62,13 @@ public class SplashActivity extends AppCompatActivity {
                         } else {
                             startActivity(toLogin);
                         }
+                        finish();
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         Log.e(TAG, t.getMessage() + "");
+                        startActivity(toLogin);
                         Toast.makeText(application, "서버 접속이 원활하지 않습니다.\n네트워크 연결 상태를 확인해주세요.", Toast.LENGTH_SHORT).show();
                         finish();
                     }

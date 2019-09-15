@@ -18,7 +18,7 @@ public interface RetrofitInterface {
     Call<User> doRegisterProcess(@Body User user);
 
     @GET("tokenLogin")
-    Call<User> doLoginWithToken(@Body String token);
+    Call<User> doLoginWithToken(@Header("Access-Token") String token);
 
 
 }

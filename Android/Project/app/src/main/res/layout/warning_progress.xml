@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:layout_marginTop="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <kr.guardians.falldetection.CustomWidget.CircleProgressBar
+        android:id="@+id/progress"
+        android:layout_centerHorizontal="true"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:progressBarThickness="20dp"
+        app:progressbarColor="#e5bd78"
+        app:progress="30"
+        app:min="0"
+        app:max="100"/>
+
+    <TextView
+        android:layout_marginTop="4dp"
+        android:layout_centerHorizontal="true"
+        android:text="1호실 홍길동"
+        android:layout_below="@id/progress"
+        android:id="@+id/progress_info_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

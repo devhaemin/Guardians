@@ -9,11 +9,13 @@ import kr.guardians.falldetection.Server.AccessToken;
 public class GlobalApplication extends Application {
     private AccessToken accessToken;
     private User user;
+    public static Context context;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
+        context = this;
     }
 
 
