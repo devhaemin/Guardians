@@ -6,9 +6,10 @@ require('moment-timezone');
 moment.tz.setDefault("Asia/Seoul");
 var client = mysql.createConnection({
 	host : 'localhost',
-	user : 'ict',
-	password : 'rkeldjswm',
-	database : 'ictDB'
+	user : 'root',
+	password : 'autoset',
+	database : 'ictDB',
+	port : '3306'
 });
 exports.sendpatientinfo = function(req, res){
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
