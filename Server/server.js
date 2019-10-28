@@ -5,7 +5,6 @@ var py = require('./js/runModel');
 var upload = require('./js/imageupload');
 var app = express();
 var server = require('http').createServer(app);
-var socketio = require('socket.io');
 var Q = require('q');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -22,6 +21,7 @@ app.get('/', function(req, res){
 	res.json({message: 'welcome to our upload module apis'});
 	console.log('get /');
 });
+app.get('/autosearch', login.autosearch);
 app.get('/bedinfo', login.bedinfo);
 app.get('/editbedinfo', login.editbedinfo);
 app.get('/changeRate', py.changeRate);

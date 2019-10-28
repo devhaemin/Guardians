@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7636c183-e164-4936-976d-4857e0248dde" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imageupload.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/loginroutes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runModel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/가디언즈 DB.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/가디언즈 DB.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/loginroutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/loginroutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="30" column="31" lean-forward="true" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+            <state relative-caret-position="490">
+              <caret line="25" column="43" lean-forward="true" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -32,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/loginroutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="75" column="23" lean-forward="true" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
+            <state relative-caret-position="304">
+              <caret line="68" column="23" lean-forward="true" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -58,10 +55,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1924" />
-    <option name="y" value="18" />
-    <option name="width" value="1271" />
-    <option name="height" value="750" />
+    <option name="x" value="2873" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -69,7 +65,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -87,6 +82,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -94,6 +90,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
@@ -122,18 +124,19 @@
       <updated>1572102180247</updated>
       <workItem from="1572102181516" duration="1101000" />
       <workItem from="1572165919105" duration="5690000" />
-      <workItem from="1572179226451" duration="9596000" />
+      <workItem from="1572179226451" duration="9747000" />
+      <workItem from="1572245629411" duration="2567000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16387000" />
+    <option name="totallyTimeSpent" value="19105000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1924" y="18" width="1271" height="750" extended-state="0" />
+    <frame x="2873" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25681254" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26258206" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -173,15 +176,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="30" column="31" lean-forward="true" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+        <state relative-caret-position="490">
+          <caret line="25" column="43" lean-forward="true" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/loginroutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="75" column="23" lean-forward="true" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
+        <state relative-caret-position="304">
+          <caret line="68" column="23" lean-forward="true" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
         </state>
       </provider>
     </entry>

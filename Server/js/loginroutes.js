@@ -60,6 +60,20 @@ exports.bedinfo = function(req, res){
 		client.end();
 	})
 }
+exports.autosearch = function(req, res){
+	var string = req.query.string;
+	var date = moment().format('YYYY-MM-DD HH:mm:ss');
+	client.query("select patientName, roomCode from patient where patientName like ?", '%' + string + '%', function(err, result, fields){
+		if(err){
+			console.log('autosearch err time : ', date);
+			res.send();
+		}
+		else{
+			console.log('autosearch time : ', date);
+			res.send(result);
+		}
+	})
+}
 exports.editbedinfo = function(req, res){
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
 	var bedCode = req.query.bedCode;
