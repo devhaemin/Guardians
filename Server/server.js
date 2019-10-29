@@ -21,11 +21,14 @@ app.get('/', function(req, res){
 	res.json({message: 'welcome to our upload module apis'});
 	console.log('get /');
 });
-app.get('/autosearch', login.autosearch);
-app.get('/bedinfo', login.bedinfo);
-app.get('/editbedinfo', login.editbedinfo);
+app.get('/sendAlarmList', login.sendAlarmList);
+app.get('/autoSearch', login.autosearch);
+app.get('/bedInfo', login.bedInfo);
+app.get('/editBedInfo', login.editbedinfo);
+app.get('/roomCodeSearch', login.roomCodesearch);
 app.get('/changeRate', py.changeRate);
-app.get('/getinfo', login.sendpatientinfo);
+app.get('/sendPatientInfo', login.sendPatientInfo);
+app.get('/searchPatientInfo', login.searchPatientInfo);
 app.get('/Tokenlogin', login.Tokenlogin);
 app.post('/register', login.register);
 app.get('/login', login.login);

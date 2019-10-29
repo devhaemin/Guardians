@@ -9,7 +9,7 @@ var client = mysql.createConnection({
 	host : 'localhost',
 	user : 'ict',
 	password : 'rkeldjswm',
-	database : 'ictDB'
+	database : 'ictdb'
 });
 exports.upload = function(req, res){
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
