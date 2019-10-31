@@ -27,19 +27,20 @@ exports.sendAlarmList = function(req, res){
 			}
 		})
 	})
-}
+}/*
 //sendPatientInfo 오류없음
 exports.sendPatientInfo = function(req, res){
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
 	var order = req.query.ordered;
 	if(order) {
-		client.query('select * from patient order by ?', order, function (error, results, fields) {
+		console.log(order);
+		client.query('select * from patient order by ?', [order], function (error, results, fields) {
 			if (error) {
 				console.log('sendinfo error time : ', date);
 				console.log(error);
 				res.status(400);
 			} else {
-				console.log("sendinfo time : ", date);
+				console.log("ordered sendinfo time : ", date);
 				res.send(results);
 				res.status(200);
 			}
@@ -88,7 +89,7 @@ exports.searchPatientInfo = function(req, res){
 			res.send(result[0]);
 		}
 	})
-}
+}*/
 //포스트맨으로 오류 없음
 exports.autosearch = function(req, res){
 	var string = req.query.str;
@@ -103,7 +104,7 @@ exports.autosearch = function(req, res){
 			res.send(result);
 		}
 	})
-}
+}/*
 //포스트맨 이상 무
 exports.roomCodesearch = function(req, res){
 	var roomCode = req.query.roomCode;
@@ -137,7 +138,7 @@ exports.editbedinfo = function(req, res){
 			res.send();
 		}
 	})
-}
+}*/
 //포스트맨 이상무
 exports.checkemail = function(req, res) {
 	var email = req.body.email;

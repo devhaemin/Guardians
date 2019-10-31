@@ -20,7 +20,7 @@ exports.upload = function(req, res){
 		console.log(result[0].patientSeq);
 		var storage = multer.diskStorage({
 			destination: function(req, file, cb){
-				cb(null,'/root/img/');
+				cb(null,'/var/www/html/');
 			},
 			filename: function(req, file, cb){
 				file.uploadFile = {

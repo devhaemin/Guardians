@@ -1,5 +1,6 @@
 var express = require('express');
 var login = require('./js/loginroutes');
+var patient = require('./js/patient');
 var bodyParser = require('body-parser');
 var py = require('./js/runModel');
 var upload = require('./js/imageupload');
@@ -11,7 +12,7 @@ app.use(bodyParser.json());
 
 app.use(function(req, res, next){
 	res.header("access-control-allow-origin", "*");
-	res.header("access-control-allow-headers", "origin, x-requested-with, content-type, accept");
+	res.header("nfoaccess-control-allow-headers", "origin, x-requested-with, content-type, accept");
 	next();
 });
 
@@ -23,12 +24,12 @@ app.get('/', function(req, res){
 });
 app.get('/sendAlarmList', login.sendAlarmList);
 app.get('/autoSearch', login.autosearch);
-app.get('/bedInfo', login.bedInfo);
-app.get('/editBedInfo', login.editbedinfo);
-app.get('/roomCodeSearch', login.roomCodesearch);
+app.get('/bedInfo', patient.bedInfo);
+app.get('/editBedInfo', patient.editbedinfo);
+app.get('/roomCodeSearch', patient.roomCodesearch);
 app.get('/changeRate', py.changeRate);
-app.get('/sendPatientInfo', login.sendPatientInfo);
-app.get('/searchPatientInfo', login.searchPatientInfo);
+app.get('/sendPatientInfo', patient.sendPatientInfo);
+app.get('/searchPatientInfo', patient.searchPatientInfo);
 app.get('/Tokenlogin', login.Tokenlogin);
 app.post('/register', login.register);
 app.get('/login', login.login);
