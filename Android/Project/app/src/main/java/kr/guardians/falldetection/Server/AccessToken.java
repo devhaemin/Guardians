@@ -30,7 +30,6 @@ public class AccessToken {
         editor.putString("token",accessToken);
         editor.apply();
         this.accessToken = accessToken;
-
     }
 
 }

@@ -5,17 +5,16 @@ import android.app.Application;
 import android.content.Context;
 import kr.guardians.falldetection.POJO.User;
 import kr.guardians.falldetection.Server.AccessToken;
+import kr.guardians.falldetection.Server.RetrofitClient;
+import kr.guardians.falldetection.Server.RetrofitInterface;
 
 public class GlobalApplication extends Application {
     private AccessToken accessToken;
     private User user;
-    public static Context context;
-
 
     @Override
     public void onCreate() {
         super.onCreate();
-        context = this;
     }
 
 

@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activity.SearchActivity">
+    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@android:color/white">
+
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@id/btn_back"
+            android:layout_toStartOf="@id/btn_cancel"
+            android:background="@drawable/a_rounded_search_btn"
+            android:drawablePadding="6dp"
+            android:ellipsize="start"
+            android:gravity="center_vertical"
+            android:hint="환자이름 또는 호실명 입력"
+            android:paddingStart="16dp"
+            android:pointerIcon="text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            android:padding="14dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btn_setting_tool"
+            android:text="취소"
+            android:textColor="@android:color/black" />
+
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/search_fragment_container"
+        android:layout_below="@id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</RelativeLayout>

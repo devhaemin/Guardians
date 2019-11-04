@@ -3,31 +3,40 @@ package kr.guardians.falldetection.POJO;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.text.format.DateUtils;
+import com.google.gson.annotations.SerializedName;
 import kr.guardians.falldetection.GlobalApplication;
 
 public class Alarm {
-    private String name;
-    private long timeSec;
-    private float progress;
-    private boolean isChecked;
+    private String userSeq;
+    @SerializedName("timestamp") private long Time;
     private String profileImageUrl;
-    private String patientCode;
+    private double warningRate;
+    private String patientName;
+    private String patientSeq;
+    private boolean isChecked;
 
-
-    public Alarm(String name, long timeSec, float progress, boolean isChecked, String profileImageUrl) {
-        this.name = name;
-        this.timeSec = timeSec;
-        this.progress = progress;
-        this.isChecked = isChecked;
-        this.profileImageUrl = profileImageUrl;
+    public boolean isChecked() {
+        return isChecked;
     }
 
-    public String getPatientCode() {
-        return patientCode;
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 
-    public void setPatientCode(String patientCode) {
-        this.patientCode = patientCode;
+    public String getUserSeq() {
+        return userSeq;
+    }
+
+    public void setUserSeq(String userSeq) {
+        this.userSeq = userSeq;
+    }
+
+    public String getTime() {
+        return DateUtils.getRelativeTimeSpanString(Time,System.currentTimeMillis(),DateUtils.SECOND_IN_MILLIS).toString();
+    }
+
+    public void setTime(long time) {
+        Time = time;
     }
 
     public String getProfileImageUrl() {
@@ -38,35 +47,27 @@ public class Alarm {
         this.profileImageUrl = profileImageUrl;
     }
 
-    public String getName() {
-        return name;
+    public double getWarningRate() {
+        return warningRate;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setWarningRate(double warningRate) {
+        this.warningRate = warningRate;
     }
 
-    public String getTimeSec() {
-        return DateUtils.getRelativeTimeSpanString(timeSec,System.currentTimeMillis(),DateUtils.SECOND_IN_MILLIS).toString();
+    public String getPatientName() {
+        return patientName;
     }
 
-    public void setTimeSec(long timeSec) {
-        this.timeSec = timeSec;
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 
-    public float getProgress() {
-        return progress;
+    public String getPatientSeq() {
+        return patientSeq;
     }
 
-    public void setProgress(float progress) {
-        this.progress = progress;
-    }
-
-    public boolean isChecked() {
-        return isChecked;
-    }
-
-    public void setChecked(boolean checked) {
-        isChecked = checked;
+    public void setPatientSeq(String patientSeq) {
+        this.patientSeq = patientSeq;
     }
 }

@@ -3,22 +3,26 @@ package kr.guardians.falldetection.POJO;
 public class Patient {
 
 
-    String name;
-    String phone;
+    private String patientName;
+    private String phone;
 
-    String roomCode;
-    String hospitalCode;
-    String imageUrl;
+    private String roomCode;
+    private String hospitalCode;
+    private String imageUrl;
+    private String profileImageUrl;
 
-    int gender;
-    int age;
-    double warningRate;
-    int patientCode;
+    private int gender;
+    private int age;
+    private double warningRate;
+    private String patientSeq;
+    private String painInfo;
+
+    private int bodyStatus;
 
 
 
-    public Patient(String name, String phone, String roomCode, String hospitalCode, String imageUrl, int gender, int age, double warningRate,int patientCode) {
-        this.name = name;
+    public Patient(String patientName, String phone, String roomCode, String hospitalCode, String imageUrl, int gender, int age, double warningRate, String patientSeq) {
+        this.patientName = patientName;
         this.phone = phone;
         this.roomCode = roomCode;
         this.hospitalCode = hospitalCode;
@@ -28,12 +32,44 @@ public class Patient {
         this.warningRate = warningRate;
     }
 
-    public int getPatientCode() {
-        return patientCode;
+    public int getBodyStatus() {
+        return bodyStatus;
     }
 
-    public void setPatientCode(int patientCode) {
-        this.patientCode = patientCode;
+    public void setBodyStatus(int bodyStatus) {
+        this.bodyStatus = bodyStatus;
+    }
+
+    public String getPainInfo() {
+        return painInfo;
+    }
+
+    public void setPainInfo(String painInfo) {
+        this.painInfo = painInfo;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public String getPatientSeq() {
+        return patientSeq;
+    }
+
+    public void setPatientSeq(String patientSeq) {
+        this.patientSeq = patientSeq;
     }
 
     public String getImageUrl() {
@@ -60,12 +96,12 @@ public class Patient {
         this.warningRate = warningRate;
     }
 
-    public String getName() {
-        return name;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 
     public int getAge() {

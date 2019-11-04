@@ -26,7 +26,7 @@
 
         <LinearLayout
             android:id="@+id/text_group"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/profile_image_view"
@@ -44,7 +44,7 @@
                 android:id="@+id/time_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3시간 전"
+                android:text="2019년 9월 2일"
                 android:textColor="#d2b2b2" />
         </LinearLayout>
 

@@ -39,7 +39,7 @@ public class AllListRecyclerAdapter extends RecyclerView.Adapter<AllListRecycler
     public void onBindViewHolder(@NonNull ListViewHolder listViewHolder, int i) {
         final Patient patient = patients.get(i);
 
-        String infoText = patient.getRoomCode()+"호실 "+patient.getName()+"님";
+        String infoText = patient.getRoomCode()+"호실 "+patient.getPatientName()+"님";
         listViewHolder.circleProgressBar.setProgress((float)patient.getWarningRate());
         listViewHolder.progressInfoText.setText(infoText);
         listViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

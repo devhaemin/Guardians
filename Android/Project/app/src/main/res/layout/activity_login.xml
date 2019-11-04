@@ -38,6 +38,7 @@
 
     <EditText
         android:id="@+id/edit_login_pw"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_login_email"

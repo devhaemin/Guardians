@@ -11,5 +11,9 @@
         <item name="android:windowActionBar">false</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="PopupMenu" parent="Base.Widget.AppCompat.PopupMenu">
+        <item name="android:itemBackground">#ffffff</item>
+        <item name="android:width">80dp</item>
+    </style>
 
 </resources>

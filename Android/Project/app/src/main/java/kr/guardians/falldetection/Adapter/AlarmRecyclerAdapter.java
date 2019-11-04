@@ -49,9 +49,9 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
         alarmViewHolder.checkedToggle.setVisibility(View.VISIBLE);
         else alarmViewHolder.checkedToggle.setVisibility(View.GONE);
 
-        alarmViewHolder.progressBar.setProgress(alarm.getProgress());
-        alarmViewHolder.dateTime.setText(alarm.getTimeSec());
-        alarmViewHolder.name.setText(alarm.getName()+"님");
+        alarmViewHolder.progressBar.setProgress((float)alarm.getWarningRate());
+        alarmViewHolder.dateTime.setText(alarm.getTime());
+        alarmViewHolder.name.setText(alarm.getPatientName()+"님");
 
         alarmViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
         });
 
         Glide.with(parent.getContext())
-                .load(R.drawable.thumbnail)
+                .load(alarm.getProfileImageUrl())
                 .thumbnail(0.1f)
                 .placeholder(R.drawable.thumbnail)
                 .apply(RequestOptions.circleCropTransform())

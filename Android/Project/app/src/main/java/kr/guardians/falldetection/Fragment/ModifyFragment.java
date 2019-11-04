@@ -70,10 +70,11 @@ public class ModifyFragment extends Fragment implements View.OnClickListener, Co
             case R.id.email_submit:
 
                 i = new Intent(Intent.ACTION_SEND);
-                i.setType("text/email");
+                i.setType("plain/text");
                 i.putExtra(Intent.EXTRA_EMAIL,new String[]{"haemin001212@naver.com"});
                 i.putExtra(Intent.EXTRA_SUBJECT,"[가디언즈 앱] 제목 :");
                 i.putExtra(Intent.EXTRA_TEXT,"앱 버전:\n오류 내용:\n사용하시는 요양원:");
+                i.setType("message/rfc822");
                 startActivity(i);
                 break;
             case R.id.show_private_term:

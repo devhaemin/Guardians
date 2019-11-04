@@ -4,17 +4,25 @@ package kr.guardians.falldetection.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import kr.guardians.falldetection.Activity.PatientInfoActivity;
 import kr.guardians.falldetection.Adapter.HomeRecyclerAdapter;
+import kr.guardians.falldetection.GlobalApplication;
 import kr.guardians.falldetection.OnItemClickListener;
 import kr.guardians.falldetection.POJO.Patient;
 import kr.guardians.falldetection.R;
+import kr.guardians.falldetection.Server.RetrofitClient;
+import kr.guardians.falldetection.Server.RetrofitInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.ArrayList;
 
@@ -26,7 +34,10 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Patient> patients;
     Intent toInfoActivity;
+    private SwipeRefreshLayout refreshLayout;
+    String TAG = "HomeFragment";
 
+    HomeRecyclerAdapter adapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -39,10 +50,20 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = v.findViewById(R.id.home_recycler);
-        patients = new ArrayList<>();
-        addDummyData();
+        refreshLayout = v.findViewById(R.id.swipe_refresh);
 
-        HomeRecyclerAdapter adapter = new HomeRecyclerAdapter(patients);
+        patients = new ArrayList<>();
+        //addDummyData();
+        refresh("warningRate");
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh("warningRate");
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
+        adapter = new HomeRecyclerAdapter(patients,getContext());
         recyclerView.setAdapter(adapter);
 
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getContext());
@@ -54,44 +75,34 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(new OnItemClickListener<Patient>() {
             @Override
             public void onItemClick(View v, Patient patient) {
-                toInfoActivity.putExtra("patientCode",patient.getPatientCode());
+                toInfoActivity.putExtra("patientCode",patient.getPatientSeq());
                 startActivity(toInfoActivity);
 
             }
         });
         return v;
     }
-    private void addDummyData(){
-        patients.add(new Patient("정해민","01098810664","12"
-                ,"20000",
-                "http://blogfiles.naver.net/data44/2009/2/24/146/c2fa_color_05_skyloveshee.gif"
-                ,0,20,10,0
-        ));
-        patients.add(new Patient("유서린","01098810664","12"
-                ,"20000",
-                "http://blogfiles.naver.net/20120420_290/kimminasss_13349010348975WBa9_JPEG/%BC%D2%B3%E0%B0%A8%BC%BA%C0%CC%B9%CC%C1%F616.jpg"
-                ,0,20,20,1
-        ));
-        patients.add(new Patient("엄태욱","01098810664","12"
-                ,"20000",
-                "http://blogfiles.naver.net/20120420_290/kimminasss_13349010348975WBa9_JPEG/%BC%D2%B3%E0%B0%A8%BC%BA%C0%CC%B9%CC%C1%F616.jpg"
-                ,0,20,40,2
-        ));
-        patients.add(new Patient("박하나","01098810664","12"
-                ,"20000",
-                "http://blogfiles.naver.net/20120420_290/kimminasss_13349010348975WBa9_JPEG/%BC%D2%B3%E0%B0%A8%BC%BA%C0%CC%B9%CC%C1%F616.jpg"
-                ,0,20,60,3
-        ));
-        patients.add(new Patient("고민혁","01098810664","12"
-                ,"20000",
-                "http://blogfiles.naver.net/20120420_290/kimminasss_13349010348975WBa9_JPEG/%BC%D2%B3%E0%B0%A8%BC%BA%C0%CC%B9%CC%C1%F616.jpg"
-                ,0,20,80,4
-        ));
-        patients.add(new Patient("이유진","01098810664","12"
-                ,"20000",
-                "http://blogfiles.naver.net/20120420_290/kimminasss_13349010348975WBa9_JPEG/%BC%D2%B3%E0%B0%A8%BC%BA%C0%CC%B9%CC%C1%F616.jpg"
-                ,0,20,100,5
-        ));
+
+    private void refresh(String order){
+        RetrofitInterface retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
+        retrofitInterface.getPatientList(((GlobalApplication)getActivity().getApplicationContext()).getAccessToken().getTokenString(),order)
+                .enqueue(new Callback<ArrayList<Patient>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Patient>> call, Response<ArrayList<Patient>> response) {
+                        if(response.body() != null){
+                            patients.clear();
+                            patients.addAll(response.body());
+                            adapter.notifyDataSetChanged();
+                        }
+                        Log.e(TAG,"Code: "+response.code()+" Message: "+response.message());
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Patient>> call, Throwable t) {
+
+                        Log.e(TAG,"Error",t);
+                    }
+                });
     }
 
 

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f6f6f6"
     tools:context=".Fragment.ListFragment">
 
     <RelativeLayout
@@ -11,23 +12,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp">
 
-        <EditText
+        <RelativeLayout
             android:id="@+id/search_button"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="4dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_toStartOf="@id/mode_menu_btn"
-            android:background="@drawable/a_rounded_search_btn"
-            android:drawableLeft="@drawable/a_search_edit_icon"
-            android:drawablePadding="6dp"
             android:ellipsize="start"
-            android:gravity="center_vertical"
-            android:hint="환자 검색"
-            android:paddingStart="16dp"
-            android:pointerIcon="text"
-            android:textSize="12sp" />
+            android:background="@drawable/a_rounded_search_btn"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_toStartOf="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/a_search_edit_icon" />
+
+            <TextView
+                android:id="@+id/text"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="환자 검색" />
+        </RelativeLayout>
 
         <ImageButton
             android:id="@+id/mode_menu_btn"
@@ -36,7 +50,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_gravity="end"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="12dp"
             android:background="?attr/selectableItemBackground"
             android:padding="4dp"
             android:scaleType="centerCrop"
@@ -45,19 +59,27 @@
     </RelativeLayout>
 
     <TextView
+        android:layout_marginTop="12dp"
         android:id="@+id/mode_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/group"
         android:layout_centerHorizontal="true"
-        android:text="ㄱㄴㄷ순" />
+        android:textSize="12dp"
+        android:text="ㄱㄴㄷ 순" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_below="@id/mode_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        android:layout_width="match_parent"
+        android:layout_marginTop="24dp"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
