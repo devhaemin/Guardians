@@ -9,20 +9,18 @@ var client = mysql.createConnection({
 	host : 'localhost',
 	user : 'ict',
 	password : 'rkeldjswm',
-	database : 'ictDB'
+	database : 'ictdb'
 });
 exports.upload = function(req, res){
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
 	console.log('imageupload post time : ', date);
-	console.log('hey : ', req.body);
-	console.log('par : ', req.query);
 	var deferred = Q.defer();
-	var deviceID = req.query.filename;
-	client.query('select patientSeq from raspberryPI where deviceID = ?', deviceID, function(error, result, field){
+	var serialNumber = req.query.filename;
+	client.query('select patientSeq from raspberryPI where serialNumber = ?', serialNumber, function(error, result, field){
 		console.log(result[0].patientSeq);
 		var storage = multer.diskStorage({
 			destination: function(req, file, cb){
-				cb(null,'/root/img/');
+				cb(null,'/var/www/html/');
 			},
 			filename: function(req, file, cb){
 				file.uploadFile = {
