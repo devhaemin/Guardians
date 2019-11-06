@@ -11,6 +11,7 @@ var client = mysql.createConnection({
 	password : 'rkeldjswm',
 	database : 'ictdb'
 });
+
 exports.upload = function(req, res){
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
 	console.log('imageupload post time : ', date);

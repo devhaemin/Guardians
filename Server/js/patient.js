@@ -44,11 +44,11 @@ exports.sendPatientInfo = function(req, res){
     }
 }
 
-//X  나중에 구현 아직 오류나는지 모름
+// 정상작동
 exports.bedInfo = function(req, res){
     var date = moment().format('YYYY-MM-DD HH:mm:ss');
     var patientSeq = req.query.patientSeq;
-    client.query('select roomCode from patient where patientSeq = ?', patientSeq, function(error, results, fields){
+    client.query('select roomCode from patient where patientSeq = ' + [patientSeq], function(error, results, fields){
         var roomCode = results[0].roomCode;
         client.query('select * from bed where roomCode = ?', roomCode, function(err, result, field){
             if(err){
@@ -57,7 +57,7 @@ exports.bedInfo = function(req, res){
             }
             else {
                 console.log('bedinfo get time : ', date);
-                res.send(result[0]);
+                res.send(result);
             }
         })
     })
