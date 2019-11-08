@@ -12,13 +12,7 @@ var client = mysql.createConnection({
     port : '3306'
 });
 
-exports.modifyDevice = function (req, res) {
-    var device = {
-        "deviceId" : req.deviceId,
-        "videoUrl" : req.videoUrl,
-        "snapShotUrl" : req.snapShotUrl
-    }
-}
+
 
 exports.getIP = function(req, res){
     var IP = req.query.IP;

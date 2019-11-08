@@ -11,23 +11,10 @@ var client = mysql.createConnection({
 	database : 'ictdb',
 	port : '3306'
 });
+
 //오류없음
-exports.sendAlarmList = function(req, res){
-	var token = req.get('Access-Token');
-	var date = moment().format('YYYY-MM-DD HH:mm:ss');
-	client.query('select userSeq from user where accessToken = ?', token, function(error, results, fields) {
-		var userSeq = results[0].userSeq;
-		client.query('select * from Alarm where userSeq = ?', userSeq, function (err, result, field) {
-			if (err) {
-				console.log('sendAlarmList error time : ', date);
-				res.send();
-			} else {
-				console.log('sendAlarmList time : ', date);
-				res.send(result);
-			}
-		})
-	})
-}
+
+
 //포스트맨으로 오류 없음
 exports.autosearch = function(req, res){
 	var string = req.query.str;
@@ -43,6 +30,7 @@ exports.autosearch = function(req, res){
 		}
 	})
 }
+
 //포스트맨 이상무
 exports.checkemail = function(req, res) {
 	var email = req.body.email;
@@ -60,6 +48,7 @@ exports.checkemail = function(req, res) {
 			}
 		})
 }
+
 //오류없음
 exports.Tokenlogin = function(req, res){
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -77,6 +66,7 @@ exports.Tokenlogin = function(req, res){
 		}
 	})
 }
+
 //X
 exports.register = function(req, res){
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -85,21 +75,29 @@ exports.register = function(req, res){
 		"userName":req.body.userName,
 		"pw":req.body.pw
 	}
-	client.query('insert into user set ?', users, function(error, results, fields){
-		if(error){
-			console.log('register failed time : ', date);
+	client.query('select * from user where email = ?', users.email, function(err, result, field) {
+		if(result.length >0) {
+			console.log('email alread exists, time : ', date, 'dmail : ', users.email);
 			res.status(400);
+		}else {
+			client.query('insert into user set ?', users, function (error, results, fields) {
+				if (error) {
+					console.log('register failed time : ', date);
+					res.status(400);
+				} else {
+					console.log('registered sucessfully time : ', date);
+					res.status(200);
+				}
+			});
 		}
-		else{
-			console.log('registered sucessfully time : ', date);
-			res.status(200);
-		}
-	});
+	})
 }
+
 //오류없음
 exports.login = function(req, res){
 	var email = req.query.email;
 	var password = req.query.pw;
+	var firebasetoken = req.query.pushToken;
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
 	client.query('select pw from user where email = ?', [email], function(error, results, fields){
 		if(error){
@@ -112,7 +110,7 @@ exports.login = function(req, res){
 					var token = jwt.sign(email, tokenkey,{
 						algorithm : 'HS256'
 					});
-					client.query('update user set loginToken=? where email=?',[token,email], function(error, result, field){
+					client.query('update user set (loginToken=?, firebaseToken = ?) where email=?',[token, firebasetoken, email], function(error, result, field){
 					})
 					client.query('select * from user where email = ?', email, function(error, result, field){
 						res.send(result[0]);

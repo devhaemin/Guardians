@@ -13,7 +13,6 @@ var client = mysql.createConnection({
     port : '3306'
 });
 
-
 //sendPatientInfo 오류없음
 exports.sendPatientInfo = function(req, res){
     var date = moment().format('YYYY-MM-DD HH:mm:ss');

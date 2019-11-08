@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var py = require('./js/runModel');
 var upload = require('./js/imageupload');
 var raspberry = require('./js/raspberry');
+var alarm = require('./js/Alarm');
 var app = express();
 var server = require('http').createServer(app);
 var Q = require('q');
@@ -23,8 +24,9 @@ app.get('/', function(req, res){
 	res.json({message: 'welcome to our upload module apis'});
 	console.log('get /');
 });
+app.get('/push', push.sendAlarm);
 app.get('/Tokenlogin', login.Tokenlogin);
-app.get('/sendAlarmList', login.sendAlarmList);
+app.get('/sendAlarmList', alarm.sendAlarmList);
 app.get('/autoSearch', login.autosearch);
 app.get('/bedInfo', patient.bedInfo);
 app.get('/editBedInfo', patient.editbedinfo);
@@ -34,11 +36,10 @@ app.get('/sendPatientInfo', patient.sendPatientInfo);
 app.get('/searchPatientInfo', patient.searchPatientInfo);
 app.get('/login', login.login);
 
-app.post('/turnOnRaspberryPI', raspberry.getIP)
+app.post('/turnOnRaspberryPI', raspberry.getIP);
 app.post('/register', login.register);
 app.post('/checkemail', login.checkemail);
-app.post('/raspberrypi', raspberry.modifyDevice);
-app.post('/:filename', upload.upload);
+// app.post('/:filename', upload.upload);
 app.listen(52273, function(){
 	/*setInterval(()=>{
 		console.log('test');
@@ -46,3 +47,6 @@ app.listen(52273, function(){
 	*/
 	console.log('server running');
 });
+
+
+//  var timestamp = Date.now();   timestamp 변수
