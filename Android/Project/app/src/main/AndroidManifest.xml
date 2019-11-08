@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="kr.guardians.falldetection">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -31,6 +32,20 @@
         <activity android:name=".RegisterProgress.InsertEmailActivity" />
         <activity android:name=".RegisterProgress.InsertNameActivity" />
         <activity android:name=".Activity.PatientListActivity"></activity>
+        <service
+            android:name=".FirebaseCloudMessage.FirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".FirebaseCloudMessage.MyService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
+
 
 </manifest>

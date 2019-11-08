@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.google.firebase.iid.FirebaseInstanceId;
 import kr.guardians.falldetection.GlobalApplication;
 import kr.guardians.falldetection.POJO.User;
 import kr.guardians.falldetection.R;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
         } else {
             RetrofitClient.getRetrofit().create(RetrofitInterface.class)
-                    .doLoginProcess(editEmail.getText().toString(), editPw.getText().toString())
+                    .doLoginProcess(editEmail.getText().toString(), editPw.getText().toString(), FirebaseInstanceId.getInstance().getToken())
                     .enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
