@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
         android:layout_toStartOf="@+id/btn_delete"
         android:text="08.19"
         android:textSize="12sp" />
@@ -36,9 +37,10 @@
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
+        android:visibility="gone"
         android:background="?attr/selectableItemBackground"
         android:padding="8dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/btn_setting_tool" />
+        android:src="@drawable/btn_trash" />
 
 </RelativeLayout>
