@@ -43,7 +43,7 @@ public class RecentSearchFragment extends Fragment {
         if(searchItems == null){
             textBlank.setVisibility(View.VISIBLE);
         }else{
-            textBlank.setVisibility(View.VISIBLE);
+            textBlank.setVisibility(View.INVISIBLE);
             RecentRecyclerAdapter recentAdapter = new RecentRecyclerAdapter(getContext(),searchItems,getActivity());
             recyclerView.setAdapter(recentAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
