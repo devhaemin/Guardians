@@ -4,14 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import kr.guardians.falldetection.CustomWidget.CircleProgressBar;
 import kr.guardians.falldetection.GlobalApplication;
 import kr.guardians.falldetection.POJO.Patient;
@@ -29,8 +33,9 @@ public class PatientInfoActivity extends AppCompatActivity {
     private String patientCode;
 
     private ImageButton btnBack;
-    private ImageView patientImage, profileImage;
-    private TextView nameText, infoText, painText, phoneText, patientInfoText;
+    private WebView patientImage;
+    private ImageView profileImage;
+    private TextView nameText, infoText, painText, phoneText, patientInfoText, progressText;
     private CircleProgressBar progressBar;
 
     private GlobalApplication application;
@@ -83,23 +88,46 @@ public class PatientInfoActivity extends AppCompatActivity {
                     painText.setText(patient.getPainInfo());
                     patientInfoText.setText(patient.getRoomCode() + "호실 " + patient.getPatientName() + "님");
                     phoneText.setText(patient.getPhone());
-                    progressBar.setProgress((int)patient.getWarningRate());
+                    int progress = (int)patient.getWarningRate();
+                    progressBar.setProgress(progress);
+                    progressText.setText(progress+"%");
+                    if(progress <= 30){
+                        progressText.setTextColor(getResources().getColor(R.color.blueProgress,null));
+                    }else if(progress <= 50){
+                        progressText.setTextColor(getResources().getColor(R.color.yellowProgress,null));
+                    }else{
+                        progressText.setTextColor(getResources().getColor(R.color.redProgress,null));
+                    }
+
 
                     Glide.with(getBaseContext())
-                            //.load(patient.getProfileImageUrl())
-                            .load("https://drive.google.com/uc?authuser=0&id=1ZVyFrRXNO-ooK7HKljtFxQ8CHqofd559&export=download")
+                            .load(patient.getProfileImageUrl())
                             .placeholder(R.drawable.status0)
                             .circleCrop()
                             .into(profileImage);
-                    Glide.with(getBaseContext())
-                            .load(patient.getImageUrl())
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .skipMemoryCache(true)
-                            .thumbnail(0.1f)
-                            .placeholder(R.drawable.status0)
-                            .into(patientImage);
+
+                    patientImage.setPadding(0, 0, 0, 0);
+                    //webView.setInitialScale(100);
+                    patientImage.getSettings().setBuiltInZoomControls(false);
+                    patientImage.getSettings().setJavaScriptEnabled(true);
+                    patientImage.getSettings().setLoadWithOverviewMode(true);
+                    patientImage.getSettings().setUseWideViewPort(true);
+                    patientImage.setInitialScale(10);
+                    patientImage.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
+                    String url = "http://rkeldjswm.iptime.org:8090/?action=stream";
+                    patientImage.loadUrl(url);
+                    DisplayMetrics disp = getApplicationContext().getResources().getDisplayMetrics();
+                    int deviceWidth = disp.widthPixels;
+                    int deviceHeight = disp.heightPixels;
+                    float density = disp.density;
+                    String imgSrcHtml = "<html><img src='" + "http://rkeldjswm.iptime.org:8090/?action=stream" + "'width='"+deviceWidth+"px' height='"+280*density+"px' /></html>";
+                    // String imgSrcHtml = url;
+                    patientImage.loadData(imgSrcHtml, "text/html", "UTF-8");
+
+
                     loadView.setVisibility(View.GONE);
-                     } else {
+                } else {
                     Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -121,6 +149,7 @@ public class PatientInfoActivity extends AppCompatActivity {
         painText = findViewById(R.id.text_pain);
         phoneText = findViewById(R.id.text_phone);
         patientInfoText = findViewById(R.id.text_patient_info);
+        progressText = findViewById(R.id.progress_text);
         profileImage = findViewById(R.id.profile_image);
         progressBar = findViewById(R.id.progress);
         progressBar.setProgress(40);

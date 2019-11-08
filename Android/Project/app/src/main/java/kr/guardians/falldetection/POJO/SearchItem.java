@@ -5,6 +5,12 @@ public class SearchItem {
     private long timeSec;
     private String patientCode;
 
+    public SearchItem(String text, long timeSec, String patientCode) {
+        this.text = text;
+        this.timeSec = timeSec;
+        this.patientCode = patientCode;
+    }
+
     public String getPatientCode() {
         return patientCode;
     }

@@ -5,11 +5,15 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import kr.guardians.falldetection.Adapter.MainPagerAdapter;
 import kr.guardians.falldetection.CustomWidget.CustomAppbar;
+import kr.guardians.falldetection.FirebaseCloudMessage.FirebaseMessagingService;
 import kr.guardians.falldetection.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
@@ -27,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.e("Token : ",FirebaseInstanceId.getInstance().getToken());
         bindViewByID();
 
         pa = new MainPagerAdapter(getSupportFragmentManager());

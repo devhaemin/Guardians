@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -31,7 +32,8 @@ public class RecentRecyclerAdapter extends RecyclerView.Adapter<RecentRecyclerAd
     @NonNull
     @Override
     public RecentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        RecentViewHolder viewHolder = new RecentViewHolder(viewGroup);
+        View v = LayoutInflater.from(context).inflate(R.layout.recycler_recent,viewGroup,false);
+        RecentViewHolder viewHolder = new RecentViewHolder(v);
         return viewHolder;
     }
 

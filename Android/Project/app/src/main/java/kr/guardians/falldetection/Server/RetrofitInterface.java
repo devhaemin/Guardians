@@ -15,7 +15,7 @@ public interface RetrofitInterface {
     Call<Room> getRoomInfo();
 
     @GET("login")
-    Call<User> doLoginProcess(@Query("email")String email, @Query("pw")String pw);
+    Call<User> doLoginProcess(@Query("email")String email, @Query("pw")String pw, @Query("pushToken")String pushToken);
 
     @FormUrlEncoded
     @POST("register")

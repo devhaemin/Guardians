@@ -92,13 +92,6 @@ public class AlarmFragment extends Fragment {
                 if(response.body() != null){
                     alarms.clear();
                     alarms.addAll(response.body());
-                    alarms.get(0).setProfileImageUrl("https://drive.google.com/uc?authuser=0&id=1XJvaY0EQ6LJOFp3aCcKQJ4G2TUGnMaKe&export=download");
-                    alarms.get(1).setProfileImageUrl("https://drive.google.com/uc?authuser=0&id=1jjGExihHtrIrUwB8O3cVXGiu_rWQNcIv&export=download");
-                    alarms.get(3).setProfileImageUrl("https://drive.google.com/uc?authuser=0&id=1jjGExihHtrIrUwB8O3cVXGiu_rWQNcIv&export=download");
-                    alarms.get(2).setProfileImageUrl("https://drive.google.com/uc?authuser=0&id=1ZVyFrRXNO-ooK7HKljtFxQ8CHqofd559&export=download");
-                    for(int i = 0; i < alarms.size(); i++){
-                        alarms.get(i).setTime(System.currentTimeMillis()-i*4-3);
-                    }
                     alarmRecyclerAdapter.notifyDataSetChanged();
                 }
                 refreshLayout.setRefreshing(false);
