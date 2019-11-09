@@ -1,14 +1,12 @@
 package kr.guardians.falldetection.POJO;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.text.format.DateUtils;
 import com.google.gson.annotations.SerializedName;
-import kr.guardians.falldetection.GlobalApplication;
 
 public class Alarm {
     private String userSeq;
-    @SerializedName("timestamp") private long Time;
+    @SerializedName("timeStamp") private long timeStamp;
     private String profileImageUrl;
     private double warningRate;
     private String patientName;
@@ -31,12 +29,12 @@ public class Alarm {
         this.userSeq = userSeq;
     }
 
-    public String getTime() {
-        return DateUtils.getRelativeTimeSpanString(Time,System.currentTimeMillis(),DateUtils.SECOND_IN_MILLIS).toString();
+    public String getTimeStamp(Context context) {
+        return DateUtils.getRelativeTimeSpanString(timeStamp,System.currentTimeMillis(),10000).toString();
     }
 
-    public void setTime(long time) {
-        Time = time;
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public String getProfileImageUrl() {

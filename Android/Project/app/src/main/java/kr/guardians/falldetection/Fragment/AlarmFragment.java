@@ -62,7 +62,7 @@ public class AlarmFragment extends Fragment {
         ((LinearLayoutManager) lm).setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(lm);
 
-        alarmRecyclerAdapter = new AlarmRecyclerAdapter(alarms);
+        alarmRecyclerAdapter = new AlarmRecyclerAdapter(alarms,getContext());
 
         recyclerView.setAdapter(alarmRecyclerAdapter);
         toInfoActivity = new Intent(container.getContext(), PatientInfoActivity.class);

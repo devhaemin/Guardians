@@ -22,9 +22,11 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     ArrayList<Alarm> alarms;
     ViewGroup parent;
     OnItemClickListener<Alarm> onItemClickListener;
+    Context context;
 
-    public AlarmRecyclerAdapter(ArrayList<Alarm> alarms) {
+    public AlarmRecyclerAdapter(ArrayList<Alarm> alarms,Context context) {
         this.alarms = alarms;
+        this.context = context;
     }
 
     public void setOnItemClickListener(OnItemClickListener<Alarm> onItemClickListener) {
@@ -50,7 +52,7 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
         else alarmViewHolder.checkedToggle.setVisibility(View.GONE);
 
         alarmViewHolder.progressBar.setProgress((float)alarm.getWarningRate());
-        alarmViewHolder.dateTime.setText(alarm.getTime());
+        alarmViewHolder.dateTime.setText(alarm.getTimeStamp(context));
         alarmViewHolder.name.setText(alarm.getPatientName()+"님");
 
         alarmViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
