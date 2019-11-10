@@ -15,7 +15,7 @@ public class RetrofitClient {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://13.58.141.235/")
+                .baseUrl("http://ec2-13-125-210-171.ap-northeast-2.compute.amazonaws.com:52273/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
