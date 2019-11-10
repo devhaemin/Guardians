@@ -12,10 +12,6 @@ var client = mysql.createConnection({
 	port : '3306'
 });
 
-//오류없음
-
-
-//포스트맨으로 오류 없음
 exports.autosearch = function(req, res){
 	var string = req.query.str;
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -31,7 +27,6 @@ exports.autosearch = function(req, res){
 	})
 }
 
-//포스트맨 이상무
 exports.checkemail = function(req, res) {
 	var email = req.body.email;
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -49,7 +44,6 @@ exports.checkemail = function(req, res) {
 		})
 }
 
-//오류없음
 exports.Tokenlogin = function(req, res){
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
 	var token = req.get('Access-Token');
@@ -66,7 +60,6 @@ exports.Tokenlogin = function(req, res){
 		}
 	})
 }
-
 //X
 exports.register = function(req, res){
 	var date = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -93,7 +86,6 @@ exports.register = function(req, res){
 	})
 }
 
-//오류없음
 exports.login = function(req, res){
 	var email = req.query.email;
 	var password = req.query.pw;

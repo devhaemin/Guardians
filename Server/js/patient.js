@@ -13,7 +13,7 @@ var client = mysql.createConnection({
     port : '3306'
 });
 
-//sendPatientInfo 오류없음
+
 exports.sendPatientInfo = function(req, res){
     var date = moment().format('YYYY-MM-DD HH:mm:ss');
     var order = req.query.ordered;
@@ -43,7 +43,6 @@ exports.sendPatientInfo = function(req, res){
     }
 }
 
-// 정상작동
 exports.bedInfo = function(req, res){
     var date = moment().format('YYYY-MM-DD HH:mm:ss');
     var patientSeq = req.query.patientSeq;
@@ -62,23 +61,30 @@ exports.bedInfo = function(req, res){
     })
 }
 
-//정상작동
 exports.searchPatientInfo = function(req, res){
     var patientSeq = req.query.patientSeq;
     var date = moment().format('YYYY-MM-DD HH:mm:ss');
-    client.query('select * from patient where patientSeq = ?', patientSeq, function(err, result, field){
+    client.query('select * from patient where patientSeq = ?', patientSeq, function(err, patientinfo, field){
         if(err){
             console.log('searchPatientInfo error time : ', date);
             res.status(400);
         }
         else{
-            console.log('searchPatientinfo time : ', date);
-            res.send(result[0]);
+            client.query('select * from bed where roomCode = ?', patientinfo[0].roomCode, function(error, bedinfo, fields){
+                if(err){
+                    res.status(400);
+                    console.log('select bed error');
+                }
+                else{
+                    patientinfo[0]["bedInfo"] = bedinfo;
+                    var set = patientinfo[0];
+                    res.send(set);
+                }
+            })
         }
     })
 }
 
-//포스트맨 이상 무
 exports.roomCodesearch = function(req, res){
     var roomCode = req.query.roomCode;
     var date = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -95,7 +101,6 @@ exports.roomCodesearch = function(req, res){
     })
 }
 
-//포스트맨 이상 무
 exports.editbedinfo = function(req, res){
     var date = moment().format('YYYY-MM-DD HH:mm:ss');
     var bedCode = req.query.bedCode;
@@ -110,6 +115,77 @@ exports.editbedinfo = function(req, res){
             console.log('editbedinfo time ; ', date);
             res.status(200);
             res.send();
+        }
+    })
+}
+
+exports.editpatientinfo = function(req, res){
+    var name = req.query.patientName;
+    var age = req.query.age;
+    var phone = req.query.phone;
+    var roomCode = req.query.roomCode;
+    var gender = req.query.gender;
+    var paininfo = req.query.paininfo;
+    client.query('update patient set patientName = ?, age = ?, phone = ?, roomCode = ?, gender = ?, paininfo = ?', [name, age, phone, roomCode, gender, paininfo], function(err, result, field){
+        if(err){
+            console.log('patientinfo update error');
+            res.status(400);
+        }
+        else{
+            console.log('edit success');
+            res.status(200);
+        }
+    })
+}
+
+exports.editroominfo = function(req, res){
+    var name = req.query.roomName;
+    var capacity = req.query.capacity;
+    var roomCode = req.query.roomCode;
+    client.query('update room set roomName = ?, capacity = ? where roomCode = ?', [name, capacity, roomCode], function(err, result, field){
+        if(err){
+            console.log('roominfo update error');
+            res.status(400);
+        }
+        else{
+            console.log('edit success');
+            res.status(200);
+        }
+    })
+}
+
+exports.edituserinfo = function(req, res){
+    var name = req.query.userName;
+    var phone = req.query.phone;
+    var Type = req.query.userType;
+    var roomCode = req.query.roomCode;
+    var Seq = req.query.userSeq;
+    client.query('update user set userName = ?, phone = ?, userType = ?, roomCode = ? where userSeq = ?', [name, phone, Type, roomCode, Seq], function(err, result, field){
+        if(err){
+            console.log('userinfo update error');
+            res.status(400);
+        }
+        else{
+            console.log('edit success');
+            res.status(200);
+        }
+    })
+}
+
+exports.addbedinfo = function(req, res){
+    var roomCode = req.query.roomCode;
+    var bedX = req.query.bedX;
+    var bedY = req.query.bedY;
+    var patientSeq = req.query.patientSeq;
+    var patientname = req.query.patientname;
+    client.query('insert into bed (roomCode, bedX, bedY, patientSeq, patientName) values (?, ?, ?, ?, ?)', [roomCode, bedX, bedY, patientSeq, patientname], function(err, result, field){
+        if(err){
+            console.log('insert error');
+            res.status(400);
+        }
+        else{
+            console.log('add success');
+            res.status(200);
         }
     })
 }

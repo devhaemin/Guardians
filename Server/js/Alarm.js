@@ -10,19 +10,18 @@ var client = mysql.createConnection({
     port : '3306'
 });
 var fcm = new FCM(serverKey);
+
 exports.sendAlarmList = function(req, res){
     var token = req.get('Access-Token');
-    var date = moment().format('YYYY-MM-DD HH:mm:ss');
-    console.log('1');
+    console.log(token);
     client.query('select userSeq from user where accessToken = ?', token, function(error, results, fields) {
-        console.log('2');
         var userSeq = results[0].userSeq;
-        client.query('select * from Alarm where userSeq = ? order by timeStamp', userSeq, function (err, result, field) {
+        client.query('select * from Alarm where userSeq = ? order by timeStamp DESC', userSeq, function (err, result, field) {
             if (err) {
-                console.log('sendAlarmList error time : ', date);
+                console.log('sendAlarmList error');
                 res.send();
             } else {
-                console.log('sendAlarmList time : ', date);
+                console.log('sendAlarmList');
                 res.send(result);
             }
             client.query('update Alarm set readed = 1 where userSeq = ?', userSeq, function (err, result, field) {
@@ -60,13 +59,13 @@ exports.sendAlarm = function(req,res){
                 var body = results[0].roomCode + "호 " + results[0].patientName + "환자, 위험도 : " + results[0].warningRate + "%";
                 var push_data = {
                     to: client_Token,
-                    notification: {
+                    /*notification: {
                         title: "[위험환자 발생알림]",
                         body: body,
                         sound: "default",
                         click_action: "FCM_PLUGIN_ACTIVITY",
                         icon: "fcm_push_icon"
-                    },
+                    },*/
                     data: {
                         "title": "[위험환자 발생알림]",
                         "body":body,
