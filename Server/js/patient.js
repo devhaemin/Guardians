@@ -3,6 +3,7 @@ var mysql = require('mysql');
 var jwt = require('jsonwebtoken');
 var tokenkey = "test_tokenkey";
 var moment = require('moment');
+var request = require('request');
 require('moment-timezone');
 moment.tz.setDefault("Asia/Seoul");
 var client = mysql.createConnection({
@@ -186,6 +187,74 @@ exports.addbedinfo = function(req, res){
         else{
             console.log('add success');
             res.status(200);
+        }
+    })
+}
+
+exports.warningRate = function(req, res){
+    var warnningRate = req.query.warningRate;
+    var bodystatus = req.query.bodystatus;
+    var patientSeq = req.query.patientSeq;
+    var timestamp = Date.now();
+    client.query('update patient set warningRate = ?, bodystatus = ? where patientSeq = ?', [warnningRate, bodystatus, patientSeq], function(err, result, field){
+        if(err){
+            console.log(err);
+                    res.send()
+        }
+        else{
+            console.log('not error');
+            if(warnningRate>60) {
+                client.query('select timestamp from Alarm where patientSeq = ? order by timestamp DESC', patientSeq, function(err, results, fields){
+                    if(results.length!=0){
+                        var time = timestamp - (results[0].timestamp*1);
+                        if(time>60000){
+                            request.get({
+                                url: 'http://ec2-13-125-210-171.ap-northeast-2.compute.amazonaws.com:52273/push?patientSeq='+patientSeq
+                            }, function (error, responses, body) {
+                                if (error) {
+                                    console.log('get error');
+                                } else {
+                                    console.log('get request');
+                                }
+                            })
+                        }
+                    }
+                    else{
+                        request.get({
+                            url: 'http://ec2-13-125-210-171.ap-northeast-2.compute.amazonaws.com:52273/push?patientSeq='+patientSeq
+                        }, function (error, responses, body) {
+                            if (error) {
+                                console.log('get error');
+                            } else {
+                                console.log('get request');
+                            }
+                        })
+                    }
+                })
+            }
+            res.send();
+        }
+    })
+}
+
+exports.addpatient = function(req, res){
+    var patientSeq = req.query.patientSeq;
+    var patientName = req.query.patientName;
+    var age = req.query.age;
+    var phone = req.query.phone;
+    var roomCode = req.query.roomCode;
+    var warningRate = req.query.warningRate;
+    var gender = req.query.gender;
+    var profileImageUrl = req.query.profileImageUrl;
+    var imageUrl = req.query.imageUrl;
+    var painInfo = req.query.paininfo;
+    var bodyStatus = req.query.bodyStatus;
+    client.query('insert into patient (patientSeq, patientName, age, phone, roomCode, warningRate, gender, profileImageUrl, imageUrl, paininfo, bodyStatus) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [patientSeq, patientName, age, phone, roomCode, warningRate, gender, profileImageUrl, imageUrl, painInfo, bodyStatus], function(err, result, field){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log('insert');
         }
     })
 }

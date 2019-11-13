@@ -24,6 +24,8 @@ app.get('/', function(req, res){
 	console.log('get /');
 });
 
+app.get('/addpatient', patient.addpatient);
+app.get('/warnningRate', patient.warningRate)
 app.get('/editBedInfo', patient.editbedinfo);
 app.get('/edituserinfo', patient.edituserinfo);
 app.get('/editroominfo', patient.editroominfo);
