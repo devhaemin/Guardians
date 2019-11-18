@@ -3,5 +3,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">ec2-13-125-210-171.ap-northeast-2.compute.amazonaws.com</domain>
         <domain includeSubdomains="true">rkeldjswm.iptime.org</domain>
+        <domain includeSubdomains="true">rkeldjswm.gonetis.com</domain>
     </domain-config>
 </network-security-config>

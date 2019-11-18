@@ -14,7 +14,16 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import kr.guardians.falldetection.Adapter.MainPagerAdapter;
 import kr.guardians.falldetection.CustomWidget.CustomAppbar;
 import kr.guardians.falldetection.FirebaseCloudMessage.FirebaseMessagingService;
+import kr.guardians.falldetection.GlobalApplication;
+import kr.guardians.falldetection.POJO.User;
 import kr.guardians.falldetection.R;
+import kr.guardians.falldetection.Server.RetrofitClient;
+import kr.guardians.falldetection.Server.RetrofitInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
@@ -31,7 +40,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e("Token : ",FirebaseInstanceId.getInstance().getToken());
+        final String token = FirebaseInstanceId.getInstance().getToken();
+        Log.e("Token : ",token);
+        RetrofitInterface retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
+        retrofitInterface.setFirebaseToken(((GlobalApplication) getApplicationContext()).getAccessToken().getTokenString(), token).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                Log.e(TAG, "Token is sent : " + token);
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
         bindViewByID();
 
         pa = new MainPagerAdapter(getSupportFragmentManager());

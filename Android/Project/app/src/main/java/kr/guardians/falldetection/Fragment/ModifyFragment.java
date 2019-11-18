@@ -63,10 +63,7 @@ public class ModifyFragment extends Fragment implements View.OnClickListener, Co
     public void onClick(View v) {
         Intent i;
         switch (v.getId()){
-            case R.id.patient_modify:
-                i = new Intent(getActivity(), PatientModifyActivity.class);
-                startActivity(i);
-                break;
+
             case R.id.email_submit:
 
                 i = new Intent(Intent.ACTION_SEND);

@@ -13,5 +13,8 @@
         <attr name="isSettingVisible" format="boolean"/>
         <attr name="titleTextColor" format="color"/>
     </declare-styleable>
+    <declare-styleable name="GuardiansBedView">
+        <attr name="bed_editable" format="boolean"/>
+    </declare-styleable>
 
 </resources>

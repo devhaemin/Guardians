@@ -1,14 +1,14 @@
 package kr.guardians.falldetection.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageButton;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import kr.guardians.falldetection.CustomWidget.CircleProgressBar;
+import kr.guardians.falldetection.CustomWidget.GuardiansBedView;
 import kr.guardians.falldetection.GlobalApplication;
 import kr.guardians.falldetection.POJO.Patient;
 import kr.guardians.falldetection.R;
@@ -26,21 +27,49 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.Random;
+
 public class PatientInfoActivity extends AppCompatActivity {
 
     private Intent fromOutside;
     private String TAG = "PatientInfoActivity";
     private String patientCode;
 
-    private ImageButton btnBack;
+    private ImageButton btnBack, btnEdit;
     private WebView patientImage;
     private ImageView profileImage;
     private TextView nameText, infoText, painText, phoneText, patientInfoText, progressText;
     private CircleProgressBar progressBar;
+    private GuardiansBedView bedView;
+    private Activity activity;
 
     private GlobalApplication application;
 
+
     private View loadView;
+    private boolean started = false;
+    private Handler handler = new Handler();
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            refreshWarning();
+            if(started) {
+                startLoop();
+            }
+        }
+    };
+
+    public void stopLoop() {
+        started = false;
+        handler.removeCallbacks(runnable);
+    }
+
+    public void startLoop() {
+        started = true;
+        handler.postDelayed(runnable, 2000);
+
+    }
 
 
     public static void start(Context context, String patientCode) {
@@ -63,7 +92,8 @@ public class PatientInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
-        refresh();
+        activity = this;
+
 
 
     }
@@ -71,7 +101,38 @@ public class PatientInfoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        refresh();
+        startLoop();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopLoop();
+    }
+    private void refreshWarning(){
+        RetrofitInterface retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
+        retrofitInterface.getPatientInfo(application.getAccessToken().getTokenString(),patientCode).enqueue(new Callback<Patient>() {
+            @Override
+            public void onResponse(Call<Patient> call, Response<Patient> response) {
+                if (response.body() != null) {
+                    int progress = (int) response.body().getWarningRate();
+                    progressBar.setProgress(progress);
+                    progressText.setText(progress + "%");
+                    if (progress <= 30) {
+                        progressText.setTextColor(getResources().getColor(R.color.blueProgress, null));
+                    } else if (progress <= 50) {
+                        progressText.setTextColor(getResources().getColor(R.color.yellowProgress, null));
+                    } else {
+                        progressText.setTextColor(getResources().getColor(R.color.redProgress, null));
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<Patient> call, Throwable t) {
+
+            }
+        });
     }
 
     private void refresh() {
@@ -88,15 +149,15 @@ public class PatientInfoActivity extends AppCompatActivity {
                     painText.setText(patient.getPainInfo());
                     patientInfoText.setText(patient.getRoomCode() + "호실 " + patient.getPatientName() + "님");
                     phoneText.setText(patient.getPhone());
-                    int progress = (int)patient.getWarningRate();
+                    int progress = (int) patient.getWarningRate();
                     progressBar.setProgress(progress);
-                    progressText.setText(progress+"%");
-                    if(progress <= 30){
-                        progressText.setTextColor(getResources().getColor(R.color.blueProgress,null));
-                    }else if(progress <= 50){
-                        progressText.setTextColor(getResources().getColor(R.color.yellowProgress,null));
-                    }else{
-                        progressText.setTextColor(getResources().getColor(R.color.redProgress,null));
+                    progressText.setText(progress + "%");
+                    if (progress <= 30) {
+                        progressText.setTextColor(getResources().getColor(R.color.blueProgress, null));
+                    } else if (progress <= 50) {
+                        progressText.setTextColor(getResources().getColor(R.color.yellowProgress, null));
+                    } else {
+                        progressText.setTextColor(getResources().getColor(R.color.redProgress, null));
                     }
 
 
@@ -115,18 +176,26 @@ public class PatientInfoActivity extends AppCompatActivity {
                     patientImage.setInitialScale(10);
                     patientImage.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
-                    String url = "http://rkeldjswm.iptime.org:8090/?action=stream";
+                    String url = "http://rkeldjswm.gonetis.com:8090/?action=stream";
                     patientImage.loadUrl(url);
                     DisplayMetrics disp = getApplicationContext().getResources().getDisplayMetrics();
                     int deviceWidth = disp.widthPixels;
                     int deviceHeight = disp.heightPixels;
                     float density = disp.density;
-                    String imgSrcHtml = "<html><img src='" + "http://rkeldjswm.iptime.org:8090/?action=stream" + "'width='"+deviceWidth+"px' height='"+280*density+"px' /></html>";
+                    String imgSrcHtml = "<html><img src='" + url + "'width='" + deviceWidth + "px' height='" + 280 * density + "px' /></html>";
                     // String imgSrcHtml = url;
                     patientImage.loadData(imgSrcHtml, "text/html", "UTF-8");
 
+                    bedView.setBeds(patient);
 
+                    btnEdit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            PatientModifyActivity.start(activity, patientCode);
+                        }
+                    });
                     loadView.setVisibility(View.GONE);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주세요", Toast.LENGTH_SHORT).show();
                     finish();
@@ -143,6 +212,7 @@ public class PatientInfoActivity extends AppCompatActivity {
 
     private void bindView() {
         btnBack = findViewById(R.id.btn_back);
+        btnEdit = findViewById(R.id.btn_edit);
         patientImage = findViewById(R.id.patient_image);
         nameText = findViewById(R.id.text_name);
         infoText = findViewById(R.id.text_info);
@@ -154,6 +224,7 @@ public class PatientInfoActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress);
         progressBar.setProgress(40);
         loadView = findViewById(R.id.load_view);
+        bedView = findViewById(R.id.bedview);
     }
 
     private void checkVaildAccess() {

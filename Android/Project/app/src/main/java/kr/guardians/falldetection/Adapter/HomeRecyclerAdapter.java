@@ -82,6 +82,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     }
 
     int getDrawableId(int status) {
+        Log.e(TAG,"Current Status : "+status);
         switch (status) {
             case 0:
                 return R.drawable.status0;

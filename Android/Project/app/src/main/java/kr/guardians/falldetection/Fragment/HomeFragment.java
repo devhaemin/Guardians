@@ -3,6 +3,7 @@ package kr.guardians.falldetection.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,10 +40,45 @@ public class HomeFragment extends Fragment {
 
     HomeRecyclerAdapter adapter;
 
+    private boolean started = false;
+    private Handler handler = new Handler();
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            refresh("warningRate");
+            if(started) {
+                startLoop();
+            }
+        }
+    };
+
+    public void stopLoop() {
+        started = false;
+        handler.removeCallbacks(runnable);
+    }
+
+    public void startLoop() {
+        started = true;
+        handler.postDelayed(runnable, 2000);
+
+    }
+
     public HomeFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        startLoop();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        stopLoop();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

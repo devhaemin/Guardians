@@ -1,5 +1,7 @@
 package kr.guardians.falldetection.POJO;
 
+import java.util.ArrayList;
+
 public class Patient {
 
 
@@ -18,8 +20,15 @@ public class Patient {
     private String painInfo;
 
     private int bodyStatus;
+    private ArrayList<Bed> bedInfo;
 
+    public ArrayList<Bed> getBedInfo() {
+        return bedInfo;
+    }
 
+    public void setBedInfo(ArrayList<Bed> bedInfo) {
+        this.bedInfo = bedInfo;
+    }
 
     public Patient(String patientName, String phone, String roomCode, String hospitalCode, String imageUrl, int gender, int age, double warningRate, String patientSeq) {
         this.patientName = patientName;

@@ -1,9 +1,6 @@
 package kr.guardians.falldetection.Server;
 
-import kr.guardians.falldetection.POJO.Alarm;
-import kr.guardians.falldetection.POJO.Patient;
-import kr.guardians.falldetection.POJO.Room;
-import kr.guardians.falldetection.POJO.User;
+import kr.guardians.falldetection.POJO.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -35,4 +32,10 @@ public interface RetrofitInterface {
 
     @GET("sendAlarmList")
     Call<ArrayList<Alarm>> getAlarmList(@Header("Access-Token")String token);
+
+    @GET("editbedinfo")
+    Call<Bed> editBedInfo(@Query("bedCode") String bedCode,@Query("bedX")String bedX,@Query("bedY")String bedY);
+
+    @GET("updatefcm")
+    Call<User> setFirebaseToken(@Header("Access-Token")String token,@Query("firebaseToken")String fcmToken);
 }

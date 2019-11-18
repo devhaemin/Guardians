@@ -6,4 +6,5 @@
     <color name="blueProgress">#78c1e0</color>
     <color name="yellowProgress">#e5bd78</color>
     <color name="redProgress">#d14341</color>
+    <color name="black">#000000</color>
 </resources>

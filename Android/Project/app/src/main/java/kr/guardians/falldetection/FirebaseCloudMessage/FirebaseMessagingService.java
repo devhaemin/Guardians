@@ -9,19 +9,27 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
+import android.os.Handler;
+import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.firebase.messaging.RemoteMessage;
+import kr.guardians.falldetection.Activity.MainActivity;
 import kr.guardians.falldetection.Activity.SplashActivity;
 import kr.guardians.falldetection.R;
 
 import java.util.Map;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
+
+    private MediaPlayer mediaPlayer;
+
     public FirebaseMessagingService() {
+
     }
 
 
@@ -55,13 +63,13 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         NotificationCompat.Builder mBuilder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            NotificationChannel notificationChannel = new NotificationChannel("3213", "guardians", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel notificationChannel = new NotificationChannel("3213", "guardians", NotificationManager.IMPORTANCE_HIGH);
             notificationChannel.setDescription("가디언즈 낙상방지 도우미");
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.GREEN);
             notificationChannel.enableVibration(true);
             notificationChannel.setVibrationPattern(new long[]{100, 200, 100, 200});
-            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             notificationManager.createNotificationChannel(notificationChannel);
             mBuilder = new NotificationCompat.Builder(getApplicationContext(), notificationChannel.getId())
                     .setContentTitle(datas.get("title"))
@@ -98,6 +106,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         } else {
             notificationManager.notify(321, not);
         }
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK  |
+                PowerManager.ACQUIRE_CAUSES_WAKEUP |
+                PowerManager.ON_AFTER_RELEASE, "My:Tag");
+        wakeLock.acquire(5000);
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
+        mediaPlayer.start();
     }
 
     @Override
