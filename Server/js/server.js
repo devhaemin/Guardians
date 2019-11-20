@@ -24,6 +24,7 @@ app.get('/', function(req, res){
 	console.log('get /');
 });
 
+app.get('/updatefcm', login.fcmToken);
 app.get('/addpatient', patient.addpatient);
 app.get('/warnningRate', patient.warningRate)
 app.get('/editBedInfo', patient.editbedinfo);

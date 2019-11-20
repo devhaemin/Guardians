@@ -38,41 +38,41 @@ exports.sendAlarm = function(req,res){
     var patientSeq = req.query.patientSeq;
         client.query('select * from patient where patientSeq = ?', patientSeq, function(error, results, fields) {
             var timestamp = Date.now();
-            client.query('insert into Alarm (userSeq, profileImageUrl, warningRate, patientName, patientSeq, timeStamp, readed) values (1, ?, ?, ?, ?, ?, 0)', [results[0].profileImageUrl, results[0].warningRate, results[0].patientName, patientSeq, timestamp ], function(errors, resul, fieldss){
-                if(errors){
+            client.query('insert into Alarm (userSeq, profileImageUrl, warningRate, patientName, patientSeq, timeStamp, readed) values (1, ?, ?, ?, ?, ?, 0)', [results[0].profileImageUrl, results[0].warningRate, results[0].patientName, patientSeq, timestamp], function (errors, resul, fieldss) {
+                if (errors) {
                     console.log('insert error');
                     console.log(errors);
                     res.send();
-                }
-                else{
+                } else {
                     console.log('insert seccess');
                     res.send();
                 }
             })
-                var client_Token = 'fbMVSRNesRg:APA91bFt3hxWLk-yEvHDsyvRcjKElHqk5-UXb6iSs9jseG0qO-7PuZxcIlDhsr7h7T-DZqBvO864Cd-NkZd5nfUmVDK-Yd45tGo0Xs7fUmgo7i-YSWzMX9kBnvg8TnJZd6CboGvAUd3H';
-                var data_warningRate = results[0].warningRate + "%";
-                var patientseq = results[0].patientSeq = '';
-                var body = results[0].roomCode + "호 " + results[0].patientName + "환자, 위험도 : " + results[0].warningRate + "%";
-                var push_data = {
-                    to: client_Token,
-                    data: {
-                        "title": "[위험환자 발생알림]",
-                        "body":body,
-                        "warningRate": data_warningRate,
-                        "patientseq" : patientseq
-                    }
+            client.query('select firebaseToken from user where userSeq = 1', function (err, result, field) {
+            var client_Token = result[0].firebaseToken;
+            var data_warningRate = results[0].warningRate + "%";
+            var patientseq = results[0].patientSeq = '';
+            var body = results[0].roomCode + "호 " + results[0].patientName + "환자, 위험도 : " + results[0].warningRate + "%";
+            var push_data = {
+                to: client_Token,
+                data: {
+                    "title": "[위험환자 발생알림]",
+                    "body": body,
+                    "warningRate": data_warningRate,
+                    "patientseq": patientseq
                 }
+            }
 
-                fcm.send(push_data, function (err, response) {
-                    if (err) {
-                        console.error('Push메시지 발송에 실패했습니다.');
-                        console.error(err);
-                        return;
-                    }
-                    console.log('Push메시지가 발송되었습니다.');
+            fcm.send(push_data, function (err, response) {
+                if (err) {
+                    console.error('Push메시지 발송에 실패했습니다.');
+                    console.error(err);
                     return;
-                });
-
+                }
+                console.log('Push메시지가 발송되었습니다.');
+                return;
+            });
+        })
         });
 };
 

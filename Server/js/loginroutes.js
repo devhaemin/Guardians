@@ -121,3 +121,18 @@ exports.login = function(req, res){
 		}
 	})
 }
+
+exports.fcmToken = function(req, res){
+	var fcm = req.query.firebaseToken;
+	client.query('update user set firebaseToken = ? where userSeq = 1', fcm, function(err, result, field){
+		if(err){
+			console.log('fcm update error');
+			console.log(err);
+			res.status(400);
+		}
+		else{
+			console.log('fcm update');
+			res.send(200);
+		}
+	})
+}
